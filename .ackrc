@@ -1,0 +1,7 @@
+# Local ack configuration file.
+# See http://nynim.org/blog/2013/03/09/project-level-ackrc-files/
+# to set up ack with local .ackrc.
+--ignore-dir=node_modules
+--ignore-dir=dist
+--ignore-dir=.jest-cache
+--ignore-file=is:coverage

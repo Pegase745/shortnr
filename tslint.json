@@ -1,0 +1,16 @@
+{
+  "exclude": [
+		"dist",
+		"node_modules"
+	],
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "object-literal-sort-keys": [false],
+    "jsx-no-lambda": [false],
+    "no-shadowed-variable": [false]
+  }
+}

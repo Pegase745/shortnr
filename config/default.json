@@ -1,0 +1,14 @@
+{
+  "hostName": "https://shortnr.local",
+  "server": {
+    "https": {
+      "key": "shortnr.key",
+      "cert": "shortnr.cert"
+    },
+    "port": 3000,
+    "host": "0.0.0.0"
+  },
+  "redis": {
+    "host": "redis.local"
+  }
+}

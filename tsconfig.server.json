@@ -1,0 +1,14 @@
+{
+  "include": [
+    "src/server"
+  ],
+  "exclude": [
+    "**/*.spec.ts"
+  ],
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "removeComments": true,
+    "outDir": "dist/server"
+  }
+}
