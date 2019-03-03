@@ -1,6 +1,5 @@
 import * as config from 'config';
 import * as fastify from 'fastify';
-import * as fs from 'fs';
 import * as path from 'path';
 
 import fastifyConfig from './config';
@@ -15,24 +14,6 @@ const server = fastify({
     prettyPrint: true,
   },
   bodyLimit: 5 * 1048576,
-  https: {
-    key: fs.readFileSync(
-      isProduction
-        ? config.get('server.https.key')
-        : path.join(
-            __dirname,
-            `../../docker/certs/${config.get('server.https.key')}`
-          )
-    ),
-    cert: fs.readFileSync(
-      isProduction
-        ? config.get('server.https.cert')
-        : path.join(
-            __dirname,
-            `../../docker/certs/${config.get('server.https.cert')}`
-          )
-    ),
-  },
 });
 
 // tslint:disable-next-line:no-var-requires
@@ -66,7 +47,7 @@ const start = async () => {
     }
 
     // tslint:disable-next-line:no-console
-    console.log(`Server listening on https://${host}:${port}`);
+    console.log(`Server listening on http://${host}:${port}`);
   } catch (err) {
     server.log.error(err);
     process.exit(1);

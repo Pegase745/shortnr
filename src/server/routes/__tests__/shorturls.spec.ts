@@ -1,6 +1,5 @@
 import * as fastify from 'fastify';
 import * as http from 'http';
-import * as https from 'https';
 
 import shortUrlsRoutes from '../shorturls';
 
@@ -8,7 +7,7 @@ jest.mock('uniqid', () => () => 'someUniqShortURL');
 
 describe('/api/shorturls', () => {
   let server: fastify.FastifyInstance<
-    https.Server,
+    http.Server,
     http.IncomingMessage,
     http.ServerResponse
   >;

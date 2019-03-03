@@ -1,12 +1,11 @@
 import * as fastify from 'fastify';
 import * as http from 'http';
-import * as https from 'https';
 
 import statusRoutes from '../status';
 
 describe('/api/status', () => {
   let server: fastify.FastifyInstance<
-    https.Server,
+    http.Server,
     http.IncomingMessage,
     http.ServerResponse
   >;
