@@ -36,7 +36,7 @@ export default fp(async (server, opts, next) => {
         .send({ redirectURL });
     } catch (err) {
       request.log.error(err);
-      return reply.send(400);
+      return reply.code(400).send({ error: err });
     }
   };
 
@@ -79,7 +79,7 @@ export default fp(async (server, opts, next) => {
         .send();
     } catch (err) {
       request.log.error(err);
-      return reply.send(500);
+      return reply.code(400).send({ error: err });
     }
   };
 

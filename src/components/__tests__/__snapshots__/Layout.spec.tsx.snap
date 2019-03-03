@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout.tsx should render 1`] = `
+<ForwardRef
+  className=""
+  renderAs="section"
+  size={null}
+  style={Object {}}
+>
+  <ForwardRef
+    breakpoint={null}
+    fluid={false}
+    renderAs="div"
+    style={Object {}}
+  >
+    Test
+  </ForwardRef>
+</ForwardRef>
+`;

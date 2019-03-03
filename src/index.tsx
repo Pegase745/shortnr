@@ -5,17 +5,20 @@ import './main.scss';
 // tslint:disable-next-line:ordered-imports
 import App from './App';
 
-declare var module: any;
 declare var CONFIG: { [key: string]: any };
 
-const renderApp = App =>
-  render(<App config={CONFIG} />, document.getElementById('root') as HTMLElement);
+export const moduleHotAccept = (module?: NodeModule) => {
+  if (module && module.hot) {
+    // Any changes to our App will cause a hotload re-render.
+    module.hot.accept('./App', () => renderApp(require('./App').default));
+  }
+};
 
-if (module.hot) {
-  // Accept changes to this file for hot reloading.
-  module.hot.accept('./index');
-  // Any changes to our App will cause a hotload re-render.
-  module.hot.accept('./App', () => renderApp(require('./App').default));
-}
+export const renderApp = App =>
+  render(<App config={CONFIG} />, document.getElementById(
+    'root'
+  ) as HTMLElement);
+
+moduleHotAccept(module);
 
 renderApp(App);

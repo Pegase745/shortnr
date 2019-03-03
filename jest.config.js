@@ -1,9 +1,10 @@
 module.exports = {
-  rootDir: 'src',
   testMatch: ['**/*.spec.(ts|tsx)'],
   verbose: false,
   clearMocks: true,
   resetModules: true,
+  coverageDirectory: './coverage/',
+  collectCoverageFrom: ['**/*.{ts,tsx}'],
   coveragePathIgnorePatterns: [
     '/node_modules/',
     '/__fixtures__/',
@@ -13,8 +14,16 @@ module.exports = {
     '.?.min.js',
   ],
   moduleDirectories: ['node_modules', 'src'],
+  moduleNameMapper: {
+    '\\.(css|scss|sass)$': 'identity-obj-proxy',
+  },
+  setupFiles: ['./tests/setupEnzyme.ts'],
+  setupFilesAfterEnv: ['./tests/setupMatchers.ts'],
+  globals: {
+    CONFIG: {},
+  },
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
-  moduleFileExtensions: ['js', 'jsx', 'json', 'ts'],
+  moduleFileExtensions: ['ts', 'tsx', 'json', 'js'],
 };

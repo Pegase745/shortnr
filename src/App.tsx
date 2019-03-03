@@ -5,7 +5,7 @@ import Message from 'react-bulma-components/lib/components/message';
 import Home from './containers/Home';
 import Redir from './containers/Redir';
 
-const NotFound: React.SFC<RouteComponentProps> = () => (
+export const NotFound: React.SFC<RouteComponentProps> = () => (
   <Message color="danger">
     <Message.Body>
       <h4>Whoops</h4>

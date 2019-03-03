@@ -2,9 +2,9 @@ import * as fastify from 'fastify';
 import * as http from 'http';
 import * as https from 'https';
 
-import statusRoutes from '../status';
+import config from '../config';
 
-describe('/api/status', () => {
+describe('server/config', () => {
   let server: fastify.FastifyInstance<
     https.Server,
     http.IncomingMessage,
@@ -13,7 +13,7 @@ describe('/api/status', () => {
 
   beforeEach(async () => {
     server = fastify({});
-    server.register(statusRoutes);
+    server.register(config, {});
     await server.ready();
 
     jest.clearAllMocks();
@@ -23,14 +23,7 @@ describe('/api/status', () => {
     server.close(() => null);
   });
 
-  describe('GET /', () => {
-    it('should return a 204', async done => {
-      const response = await server.inject({
-        method: 'GET',
-        url: '/api/status',
-      });
-      expect(response.statusCode).toEqual(204);
-      done();
-    });
+  it('should have a config object', () => {
+    expect(server.config).toEqual({});
   });
 });

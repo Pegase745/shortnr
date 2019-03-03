@@ -3,5 +3,6 @@
 # to set up ack with local .ackrc.
 --ignore-dir=node_modules
 --ignore-dir=dist
+--ignore-dir=coverage
 --ignore-dir=.jest-cache
 --ignore-file=is:coverage
