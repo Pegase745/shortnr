@@ -7,9 +7,21 @@ cache:
 node_js:
   - "lts/*"
 
+services:
+  - docker
+
+before_install:
+  - docker build -t pegase/shortnr -f Dockerfile.prod .
+
 install:
   - npm ci
   - npm install -g codecov
 
 script:
   - npm run coverage && codecov
+
+deploy:
+  provider: script
+  script: ./bin/push-docker.sh
+  on:
+    branch: master

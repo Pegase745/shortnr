@@ -1,0 +1,18 @@
+FROM node:lts-slim AS build-env
+
+COPY . /srv/shortnr
+WORKDIR /srv/shortnr
+
+RUN ./bin/install-docker.sh
+
+FROM node:lts-slim
+
+COPY --from=build-env /srv/shortnr /srv/shortnr
+
+ENV NODE_ENV=production
+
+WORKDIR /srv/shortnr
+
+EXPOSE 3000 8080
+
+CMD ["node", "dist/server/index.js"]
