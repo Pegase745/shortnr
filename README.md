@@ -10,7 +10,7 @@ Simple URL shortener written in TypeScript and backed by Redis.
 
 ## Usage
 
-```
+```console
 $ npm install
 $ docker-compose up
 $ Add `https://shortnr.local` in `/etc/hosts`
