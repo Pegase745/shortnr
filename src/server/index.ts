@@ -63,7 +63,7 @@ process.on('SIGINT', async () => {
 
   await server.close(() => {
     // tslint:disable-next-line:no-console
-    console.log('Server succesfully stopped');
+    console.log('Server successfully stopped');
     process.exit(0);
   });
 });

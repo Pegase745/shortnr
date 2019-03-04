@@ -1,12 +1,12 @@
 import { IConfig } from 'config';
-import { Redis } from 'ioredis';
 import * as fastify from 'fastify';
-import * as https from 'http';
 import * as http from 'http';
+import { Redis } from 'ioredis';
 
 declare module 'fastify' {
+  // tslint:disable-next-line:interface-name
   export interface FastifyInstance<
-    HttpServer = https.Server,
+    HttpServer = http.Server,
     HttpRequest = http.IncomingMessage,
     HttpResponse = http.ServerResponse
   > {
