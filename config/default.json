@@ -5,6 +5,7 @@
     "host": "0.0.0.0"
   },
   "redis": {
-    "host": "redis.local"
+    "host": "redis.local",
+    "port": 6379
   }
 }

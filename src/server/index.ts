@@ -19,7 +19,10 @@ const server = fastify({
 // tslint:disable-next-line:no-var-requires
 server.register(require('fastify-helmet'));
 // tslint:disable-next-line:no-var-requires
-server.register(require('fastify-redis'), { host: config.get('redis.host') });
+server.register(require('fastify-redis'), {
+  host: config.get('redis.host'),
+  port: config.get('redis.port'),
+});
 
 server.register(fastifyConfig, config);
 server.register(statusRoutes);
