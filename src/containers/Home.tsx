@@ -14,7 +14,6 @@ interface IProps {
   config: { [key: string]: any };
 }
 
-
 interface IState {
   redirectURL: string;
   shortURL: string;
@@ -49,36 +48,34 @@ class Home extends React.Component<IProps & RouteComponentProps, IState> {
   };
 
   public renderField() {
-    if (this.state.shortURL === '') {
-      return (
-        <React.Fragment>
-          <Field>
-            <Control>
-              <Textarea
-                type="text"
-                placeholder="Paste a link..."
-                disabled={this.state.isWorking}
-                value={this.state.redirectURL}
-                onChange={this.handleChange}
-              />
-            </Control>
-          </Field>
-          <Button
-            color="primary"
-            position="end"
-            loading={this.state.isWorking}
-            disabled={!this.state.redirectURL}
-            onClick={this.handleShortening}
-          >
-            Shorten me
-          </Button>
-        </React.Fragment>
-      );
-    }
-
     return (
       <React.Fragment>
-        <Link to={`/r/${this.state.shortURL}`}>{`${this.props.config.hostName}/r/${this.state.shortURL}`}</Link>
+        {this.state.shortURL !== '' && (
+          <Link to={`/r/${this.state.shortURL}`}>{`${
+            this.props.config.hostName
+          }/r/${this.state.shortURL}`}</Link>
+        )}
+
+        <Field>
+          <Control>
+            <Textarea
+              type="text"
+              placeholder="Paste a link..."
+              disabled={this.state.isWorking}
+              value={this.state.redirectURL}
+              onChange={this.handleChange}
+            />
+          </Control>
+        </Field>
+        <Button
+          color="primary"
+          position="end"
+          loading={this.state.isWorking}
+          disabled={!this.state.redirectURL}
+          onClick={this.handleShortening}
+        >
+          Shorten me
+        </Button>
       </React.Fragment>
     );
   }
