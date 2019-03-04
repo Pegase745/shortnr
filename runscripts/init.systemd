@@ -1,0 +1,23 @@
+# Shortnr systemd service unit file
+#
+# Don't forget to `npm install -g shortnr`
+
+### Configuration
+
+[Unit]
+Description=Shortnr Daemon
+After=network-online.target
+
+[Service]
+User=shortnr
+Group=shortnr
+
+Type=simple
+# Define NODE_CONFIG_DIR and NODE_ENV in conf file
+EnvironmentFile=/etc/shortnr/shortnr.conf
+ExecStart=/usr/local/bin/shortnr
+Restart=on-failure
+TimeoutStopSec=300
+
+[Install]
+WantedBy=multi-user.target
