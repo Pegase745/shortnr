@@ -1,6 +1,6 @@
 # shortnr
 
-[![Node Version](https://img.shields.io/badge/node-LTS-brightgreen.svg)](https://img.shields.io/badge/node-LTS-brightgreen.svg)
+[![Npm Version](https://img.shields.io/npm/v/shortnr.svg)](https://www.npmjs.com/package/shortnr)
 [![Build Status](https://travis-ci.com/Pegase745/shortnr.svg?branch=master)](https://travis-ci.com/Pegase745/shortnr)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0e235cc8b4374d839d482eeb13405599)](https://www.codacy.com/app/Pegase745/shortnr)
 [![Codecov](https://codecov.io/gh/Pegase745/shortnr/branch/master/graph/badge.svg)](https://codecov.io/gh/Pegase745/shortnr)
