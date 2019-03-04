@@ -30,4 +30,3 @@ deploy:
     skip_cleanup: true
     email: $NPM_EMAIL
     api_key: $NPM_TOKEN
-    tag: $TRAVIS_TAG
