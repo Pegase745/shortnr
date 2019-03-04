@@ -1,6 +1,6 @@
 {
   "name": "shortnr",
-  "version": "0.0.1",
+  "version": "1.0.0-alpha.0",
   "description": "Simple URL shortener written in TypeScript and backed by Redis.",
   "author": "Michel Nemnom",
   "license": "MIT",
@@ -14,7 +14,10 @@
   "engines": {
     "node": "^8 || ^10"
   },
-  "files": ["/dist", "/bin/shortnr.js"],
+  "files": [
+    "/dist",
+    "/bin/shortnr.js"
+  ],
   "scripts": {
     "start": "concurrently npm:start:*",
     "start:dev": "cross-env NODE_ENV=development webpack-dev-server",
