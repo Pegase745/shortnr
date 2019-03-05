@@ -9,8 +9,8 @@ declare var CONFIG: { [key: string]: any };
 
 export const moduleHotAccept = (module?: NodeModule) => {
   if (module && module.hot) {
-    // Any changes to our App will cause a hotload re-render.
-    module.hot.accept('./App', () => renderApp(require('./App').default));
+    // Accept changes for hot reloading.
+    module.hot.accept();
   }
 };
 
