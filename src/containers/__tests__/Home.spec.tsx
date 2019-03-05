@@ -2,7 +2,7 @@ import axios from 'axios';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import Button from 'react-bulma-components/lib/components/button';
-import { Textarea } from 'react-bulma-components/lib/components/form';
+import { Input } from 'react-bulma-components/lib/components/form';
 
 import Home from '../Home';
 
@@ -26,7 +26,7 @@ describe('Home.tsx', () => {
   it('should change redirectURL in the state', () => {
     const wrapper = shallow(<Home {...defaultProps} />);
     wrapper
-      .find(Textarea)
+      .find(Input)
       .simulate('change', { target: { value: 'https://redirect.url' } });
 
     expect(wrapper.state('redirectURL')).toEqual('https://redirect.url');

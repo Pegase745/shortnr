@@ -37,7 +37,7 @@ describe('index.tsx', () => {
           addStatusHandler: jest.fn(),
           removeStatusHandler: jest.fn(),
           data: '',
-          accept: jest.fn((a, b) => b()),
+          accept: jest.fn(),
         },
       };
 
