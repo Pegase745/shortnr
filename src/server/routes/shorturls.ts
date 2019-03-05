@@ -1,7 +1,7 @@
 import * as fastify from 'fastify';
 import * as fp from 'fastify-plugin';
 import * as http from 'http';
-import * as uniqid from 'uniqid';
+import * as getUUID from 'uuid-by-string';
 
 export default fp(async (server, opts, next) => {
   /**
@@ -69,7 +69,7 @@ export default fp(async (server, opts, next) => {
   ) => {
     try {
       const redirectURL = request.body.redirectURL;
-      const shortURL = uniqid();
+      const shortURL = getUUID(redirectURL);
 
       await server.redis.set(shortURL, redirectURL);
 

@@ -8,6 +8,7 @@ import {
   Textarea,
 } from 'react-bulma-components/lib/components/form';
 import Heading from 'react-bulma-components/lib/components/heading';
+import Notification from 'react-bulma-components/lib/components/notification';
 import Layout from '../components/Layout';
 
 interface IProps {
@@ -51,9 +52,11 @@ class Home extends React.Component<IProps & RouteComponentProps, IState> {
     return (
       <React.Fragment>
         {this.state.shortURL !== '' && (
-          <Link to={`/r/${this.state.shortURL}`}>{`${
-            this.props.config.hostName
-          }/r/${this.state.shortURL}`}</Link>
+          <Notification>
+            <Link to={`/r/${this.state.shortURL}`}>{`${
+              this.props.config.hostName
+            }/r/${this.state.shortURL}`}</Link>
+          </Notification>
         )}
 
         <Field>

@@ -3,7 +3,7 @@ import * as http from 'http';
 
 import shortUrlsRoutes from '../shorturls';
 
-jest.mock('uniqid', () => () => 'someUniqShortURL');
+jest.mock('uuid-by-string', () => () => 'someUniqShortURL');
 
 describe('/api/shorturls', () => {
   let server: fastify.FastifyInstance<
