@@ -1,6 +1,6 @@
 {
   "name": "shortnr",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "description": "Simple URL shortener written in TypeScript and backed by Redis.",
   "author": "Michel Nemnom",
   "license": "MIT",
