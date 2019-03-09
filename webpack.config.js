@@ -1,5 +1,4 @@
 const path = require('path');
-const config = require('config');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
@@ -64,7 +63,6 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: path.join(__dirname, 'src', 'index.html'),
     }),
-    new webpack.DefinePlugin({ CONFIG: JSON.stringify(require('config')) }),
     !isDev && new webpack.optimize.AggressiveMergingPlugin(),
     isDev && new webpack.HotModuleReplacementPlugin(),
     !isDev &&

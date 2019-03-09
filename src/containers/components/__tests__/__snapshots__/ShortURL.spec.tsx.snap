@@ -64,7 +64,7 @@ exports[`ShortURL.tsx should render 1`] = `
       <ForwardRef
         to="/r/shortURL"
       >
-        https://shortnr.local/r/shortURL
+        https://shortnr.localr/shortURL
       </ForwardRef>
     </ForwardRef>
     <ForwardRef
@@ -115,7 +115,7 @@ exports[`ShortURL.tsx should render 1`] = `
     >
       <CopyToClipboard
         onCopy={[Function]}
-        text="https://shortnr.local/r/shortURL"
+        text="https://shortnr.localr/shortURL"
       >
         <ForwardRef
           className=""

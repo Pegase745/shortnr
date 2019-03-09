@@ -3,7 +3,6 @@
 exports[`App.tsx should render 1`] = `
 <Router>
   <Home
-    config={Object {}}
     path="/"
   />
   <Redir

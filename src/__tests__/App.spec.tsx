@@ -6,7 +6,7 @@ import App, { NotFound } from '../App';
 
 describe('App.tsx', () => {
   it('should render', () => {
-    const app = shallow(<App config={{}} />);
+    const app = shallow(<App />);
 
     expect(app).toMatchSnapshot();
   });

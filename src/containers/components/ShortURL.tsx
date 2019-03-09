@@ -12,7 +12,7 @@ interface IShortURLProps {
 
 const ShortURL: React.FC<IShortURLProps> = ({ shortURL, hostName }) => {
   const [copied, setCopied] = React.useState(false);
-  const fullURL = `${hostName}/r/${shortURL}`;
+  const fullURL = `${hostName}r/${shortURL}`;
 
   return (
     <Notification>

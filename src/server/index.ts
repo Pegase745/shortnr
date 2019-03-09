@@ -17,6 +17,8 @@ const server = fastify({
 });
 
 // tslint:disable-next-line:no-var-requires
+server.register(require('fastify-no-icon'));
+// tslint:disable-next-line:no-var-requires
 server.register(require('fastify-helmet'));
 // tslint:disable-next-line:no-var-requires
 server.register(require('fastify-redis'), {

@@ -14,14 +14,10 @@ export const NotFound: React.SFC<RouteComponentProps> = () => (
   </Message>
 );
 
-interface IAppProps {
-  config: { [key: string]: any };
-}
-
-const App = (props: IAppProps) => {
+const App = () => {
   return (
     <Router>
-      <Home path="/" config={props.config} />
+      <Home path="/" />
       <Redir path="/r/:shortURL" />
       <NotFound default={true} />
     </Router>

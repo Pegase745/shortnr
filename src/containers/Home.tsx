@@ -1,7 +1,6 @@
 import { RouteComponentProps } from '@reach/router';
 import axios from 'axios';
 import * as React from 'react';
-import Box from 'react-bulma-components/lib/components/box';
 import Button from 'react-bulma-components/lib/components/button';
 import {
   Control,
@@ -13,17 +12,13 @@ import Heading from 'react-bulma-components/lib/components/heading';
 import Layout from '../components/Layout';
 import ShortURL from './components/ShortURL';
 
-interface IProps {
-  config: { [key: string]: any };
-}
-
 interface IState {
   redirectURL: string;
   shortURL: string;
   isWorking: boolean;
 }
 
-class Home extends React.Component<IProps & RouteComponentProps, IState> {
+class Home extends React.Component<RouteComponentProps, IState> {
   public state = {
     redirectURL: '',
     shortURL: '',
@@ -56,7 +51,7 @@ class Home extends React.Component<IProps & RouteComponentProps, IState> {
         {this.state.shortURL !== '' && (
           <ShortURL
             shortURL={this.state.shortURL}
-            hostName={this.props.config.hostName}
+            hostName={this.props.location.href}
           />
         )}
 
