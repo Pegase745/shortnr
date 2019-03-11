@@ -36,7 +36,7 @@ module.exports = {
       },
       {
         // Bundle all imported '.scss' files
-        test: /\.(scss|sass)$/,
+        test: /\.css$/,
         use: [
           {
             // Create style nodes from JS strings
@@ -46,17 +46,18 @@ module.exports = {
             // Translate CSS into CommonJS
             loader: 'css-loader',
           },
-          {
-            // Compile Sass to CSS
-            loader: 'sass-loader',
-          },
         ],
       },
-      // {
-      //   // Bundle fonts referenced in CSS files
-      //   test: /\.(woff|woff2|eot|ttf)$/,
-      //   loader: 'url-loader',
-      // },
+      {
+        // Bundle fonts referenced in CSS files
+        test: /\.(png|woff|woff2|eot|ttf)$/,
+        loader: 'url-loader?limit=100000',
+      },
+      {
+        // Bundle svgs referenced in CSS files
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        use: 'url-loader?limit=10000&mimetype=image/svg+xml',
+      },
     ],
   },
   plugins: [

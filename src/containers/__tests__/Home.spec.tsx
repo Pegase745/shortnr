@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { shallow } from 'enzyme';
 import * as React from 'react';
-import Button from 'react-bulma-components/lib/components/button';
-import { Input } from 'react-bulma-components/lib/components/form';
 
 import Home from '../Home';
 
@@ -22,7 +20,7 @@ describe('Home.tsx', () => {
   it('should change redirectURL in the state', () => {
     const wrapper = shallow(<Home />);
     wrapper
-      .find(Input)
+      .find('Input')
       .simulate('change', { target: { value: 'https://redirect.url' } });
 
     expect(wrapper.state('redirectURL')).toEqual('https://redirect.url');
@@ -31,7 +29,7 @@ describe('Home.tsx', () => {
   xit('should set shortURL in the state', done => {
     const wrapper = shallow(<Home />);
 
-    wrapper.find(Button).simulate('click');
+    wrapper.find('Button').simulate('click');
     expect(wrapper.state('isWorking')).toBeTruthy();
 
     process.nextTick(() => {

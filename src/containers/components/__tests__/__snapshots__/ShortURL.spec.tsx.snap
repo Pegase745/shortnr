@@ -1,148 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ShortURL.tsx should render 1`] = `
-<ForwardRef
-  className=""
-  color={null}
-  renderAs="div"
-  style={Object {}}
+<Segment
+  basic={true}
+  textAlign="center"
 >
-  <ForwardRef
-    breakpoint={null}
-    centered={false}
-    className=""
-    gapless={false}
-    multiline={true}
-    style={Object {}}
+  <Grid
+    textAlign="center"
   >
-    <ForwardRef
-      className=""
-      desktop={
-        Object {
-          "narrow": undefined,
-          "offset": undefined,
-          "size": undefined,
-        }
-      }
-      fullhd={
-        Object {
-          "narrow": undefined,
-          "offset": undefined,
-          "size": undefined,
-        }
-      }
-      mobile={
-        Object {
-          "narrow": undefined,
-          "offset": undefined,
-          "size": undefined,
-        }
-      }
-      style={Object {}}
-      tablet={
-        Object {
-          "narrow": undefined,
-          "offset": undefined,
-          "size": undefined,
-        }
-      }
-      touch={
-        Object {
-          "narrow": undefined,
-          "offset": undefined,
-          "size": undefined,
-        }
-      }
-      widescreen={
-        Object {
-          "narrow": undefined,
-          "offset": undefined,
-          "size": undefined,
-        }
-      }
+    <GridColumn
+      width={9}
     >
-      <ForwardRef
-        to="/r/shortURL"
-      >
-        https://shortnr.localr/shortURL
-      </ForwardRef>
-    </ForwardRef>
-    <ForwardRef
-      className=""
-      desktop={
-        Object {
-          "narrow": undefined,
-          "offset": undefined,
-          "size": undefined,
+      <Input
+        action={
+          Object {
+            "color": "teal",
+            "icon": "copy",
+            "onClick": [Function],
+          }
         }
-      }
-      fullhd={
-        Object {
-          "narrow": undefined,
-          "offset": undefined,
-          "size": undefined,
-        }
-      }
-      mobile={
-        Object {
-          "narrow": undefined,
-          "offset": undefined,
-          "size": undefined,
-        }
-      }
-      style={Object {}}
-      tablet={
-        Object {
-          "narrow": undefined,
-          "offset": undefined,
-          "size": undefined,
-        }
-      }
-      touch={
-        Object {
-          "narrow": undefined,
-          "offset": undefined,
-          "size": undefined,
-        }
-      }
-      widescreen={
-        Object {
-          "narrow": undefined,
-          "offset": undefined,
-          "size": undefined,
-        }
-      }
-    >
-      <CopyToClipboard
-        onCopy={[Function]}
-        text="https://shortnr.localr/shortURL"
-      >
-        <ForwardRef
-          className=""
-          color="light"
-          disabled={false}
-          fullwidth={false}
-          inverted={true}
-          isSelected={false}
-          isStatic={false}
-          loading={false}
-          onClick={[Function]}
-          outlined={false}
-          position="end"
-          remove={false}
-          renderAs="button"
-          reset={false}
-          rounded={true}
-          size="small"
-          state={null}
-          style={Object {}}
-          submit={false}
-          text={false}
-        >
-          Copy to clipboard
-        </ForwardRef>
-      </CopyToClipboard>
-    </ForwardRef>
-  </ForwardRef>
-</ForwardRef>
+        defaultValue="https://shortnr.localr/shortURL"
+        fluid={true}
+        readOnly={true}
+        type="text"
+      />
+    </GridColumn>
+  </Grid>
+</Segment>
 `;
