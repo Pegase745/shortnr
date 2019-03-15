@@ -3,6 +3,8 @@ import * as fp from 'fastify-plugin';
 import * as http from 'http';
 import * as getUUID from 'uuid-by-string';
 
+import { formatURL } from '../utils';
+
 export default fp(async (server, opts, next) => {
   /**
    * GET /api/shorturls/:shortURL
@@ -69,9 +71,10 @@ export default fp(async (server, opts, next) => {
   ) => {
     try {
       const redirectURL = request.body.redirectURL;
+      const formattedRedirectURL = formatURL(redirectURL);
       const shortURL = getUUID(redirectURL);
 
-      await server.redis.set(shortURL, redirectURL);
+      await server.redis.set(shortURL, formattedRedirectURL);
 
       return reply
         .code(201)
