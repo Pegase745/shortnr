@@ -13,9 +13,16 @@ Simple URL shortener written in TypeScript and backed by Redis.
 ```console
 $ npm install
 $ docker-compose up
-$ Add `https://shortnr.local` in `/etc/hosts`
-$ Go to `https://shortnr.local`
 ```
+
+Add the following in `/etc/hosts`:
+
+```console
+127.0.0.1	shortnr.local
+```
+
+Then, go to `https://shortnr.local`.
+
 
 ## Changelog
 
