@@ -10,7 +10,7 @@ const isDev = env === 'development';
 
 module.exports = {
   mode: env,
-  devtool: isDev ? 'inline-source-map' : 'source-map',
+  devtool: isDev && 'inline-source-map',
   target: 'web',
   entry: ['./src/index'],
   output: {
