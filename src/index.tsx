@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 
-import './main.scss';
+import 'semantic-ui-css/semantic.min.css';
 // tslint:disable-next-line:ordered-imports
 import App from './App';
 

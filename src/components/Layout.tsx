@@ -1,17 +1,12 @@
 import * as React from 'react';
-import Container from 'react-bulma-components/lib/components/container';
-import Section from 'react-bulma-components/lib/components/section';
+import { Container } from 'semantic-ui-react';
 
 interface ILayoutProps {
   children: React.ReactNode;
 }
 
 const Layout: React.FC<ILayoutProps> = ({ children }) => (
-  <Section>
-    <Container>
-      {children}
-    </Container>
-  </Section>
+  <Container>{children}</Container>
 );
 
 export default Layout;

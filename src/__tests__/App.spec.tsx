@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
-import Message from 'react-bulma-components/lib/components/message';
 
 import App, { NotFound } from '../App';
 
@@ -14,6 +13,6 @@ describe('App.tsx', () => {
   it('should render NotFound', () => {
     const wrapper = shallow(<NotFound />, { disableLifecycleMethods: true });
 
-    expect(wrapper.find(Message)).toExist();
+    expect(wrapper.find('Message')).toExist();
   });
 });

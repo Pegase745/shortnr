@@ -1,9 +1,6 @@
-import { Link } from '@reach/router';
+import * as copyToClipboard from 'copy-to-clipboard';
 import * as React from 'react';
-import Button from 'react-bulma-components/lib/components/button';
-import Columns from 'react-bulma-components/lib/components/columns';
-import Notification from 'react-bulma-components/lib/components/notification';
-import * as CopyToClipboard from 'react-copy-to-clipboard';
+import { Grid, Input, Segment } from 'semantic-ui-react';
 
 interface IShortURLProps {
   shortURL: string;
@@ -13,34 +10,31 @@ interface IShortURLProps {
 const ShortURL: React.FC<IShortURLProps> = ({ shortURL, hostName }) => {
   const [copied, setCopied] = React.useState(false);
   const fullURL = `${hostName}r/${shortURL}`;
+  const handleClick = () => {
+    copyToClipboard(fullURL);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 3000);
+  };
+
+  const actionProps = {
+    color: 'teal',
+    icon: 'copy',
+    onClick: handleClick,
+  };
 
   return (
-    <Notification>
-      <Columns>
-        <Columns.Column>
-          <Link to={`/r/${shortURL}`}>{fullURL}</Link>
-        </Columns.Column>
-        <Columns.Column>
-          <CopyToClipboard
-            text={fullURL}
-            onCopy={() => {
-              setCopied(true);
-              setTimeout(() => setCopied(false), 3000);
-            }}
-          >
-            <Button
-              color="light"
-              position="end"
-              size="small"
-              inverted={true}
-              rounded={true}
-            >
-              {copied ? 'Copied to clipboard' : 'Copy to clipboard'}
-            </Button>
-          </CopyToClipboard>
-        </Columns.Column>
-      </Columns>
-    </Notification>
+    <Segment basic={true} textAlign="center">
+      <Grid textAlign="center">
+        <Grid.Column width={9}>
+          <Input
+            fluid={true}
+            readOnly={true}
+            action={actionProps}
+            defaultValue={fullURL}
+          />
+        </Grid.Column>
+      </Grid>
+    </Segment>
   );
 };
 
