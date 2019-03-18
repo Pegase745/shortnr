@@ -4,8 +4,7 @@ import * as React from 'react';
 import ShortURL from '../ShortURL';
 
 const defaultProps = {
-  shortURL: 'shortURL',
-  hostName: 'https://shortnr.local',
+  fullURL: 'https://shortnr.local/r/shortURL',
 };
 
 describe('ShortURL.tsx', () => {

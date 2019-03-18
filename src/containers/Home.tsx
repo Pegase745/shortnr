@@ -1,10 +1,12 @@
 import { RouteComponentProps } from '@reach/router';
 import axios from 'axios';
+import * as copyToClipboard from 'copy-to-clipboard';
 import * as React from 'react';
-import { Header, Input } from 'semantic-ui-react';
+import { Header, Input, Message } from 'semantic-ui-react';
 
 import Layout from '../components/Layout';
 import ShortURL from './components/ShortURL';
+import { getShortenedFullURL } from './utils';
 
 const style = {
   h1: {
@@ -56,6 +58,9 @@ class Home extends React.Component<RouteComponentProps, IState> {
       .then(res => {
         const shortURL = res.headers['location-id'];
         this.setState({ shortURL });
+
+        const fullURL = getShortenedFullURL(this.props.location.href, shortURL);
+        copyToClipboard(fullURL);
       })
       .finally(() => {
         this.setState({ isWorking: false });
@@ -91,13 +96,30 @@ class Home extends React.Component<RouteComponentProps, IState> {
           onChange={this.handleChange}
         />
 
+        {this.renderFlashMessage()}
+
         {this.state.shortURL !== '' && (
           <ShortURL
-            shortURL={this.state.shortURL}
-            hostName={this.props.location.href}
+            fullURL={getShortenedFullURL(
+              this.props.location.href,
+              this.state.shortURL
+            )}
           />
         )}
       </React.Fragment>
+    );
+  }
+
+  public renderFlashMessage() {
+    if (this.state.isWorking || !this.state.shortURL) {
+      return null;
+    }
+
+    return (
+      <Message
+        success={true}
+        content="Your shortened URL was copied to your clipboard!"
+      />
     );
   }
 
