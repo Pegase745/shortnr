@@ -4,6 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const env = process.env.NODE_ENV;
 const isDev = env === 'development';
@@ -15,7 +16,7 @@ module.exports = {
   entry: ['./src/index'],
   output: {
     path: path.join(__dirname, 'dist', 'public'),
-    filename: isDev ? 'bundle.js' : 'bundle.[chunkhash].js',
+    filename: isDev ? 'index.js' : 'index.[chunkhash].js',
     publicPath: '/',
   },
   resolve: {
@@ -35,32 +36,40 @@ module.exports = {
         exclude: [path.resolve(__dirname, 'node_modules')],
       },
       {
-        // Bundle all imported '.scss' files
+        // Bundle all imported '.css' files
         test: /\.css$/,
         use: [
           {
             // Create style nodes from JS strings
             loader: 'style-loader',
           },
+          MiniCssExtractPlugin.loader,
           {
             // Translate CSS into CommonJS
             loader: 'css-loader',
           },
+          {
+            // Keep only woff2 fonts
+            loader: 'postcss-loader',
+          },
         ],
       },
+      // Bundle fonts referenced in CSS files
       {
-        // Bundle fonts referenced in CSS files
-        test: /\.(png|woff|woff2|eot|ttf)$/,
-        loader: 'url-loader?limit=100000',
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        loader: 'file-loader?limit=100000&name=fonts/[name].[ext]',
       },
+      // Bundle images referenced in CSS files
       {
-        // Bundle svgs referenced in CSS files
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        use: 'url-loader?limit=10000&mimetype=image/svg+xml',
+        test: /\.(png)$/,
+        loader: 'file-loader?limit=100000&name=images/[name].[ext]',
       },
     ],
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: isDev ? 'index.css' : 'index.[contenthash].css',
+    }),
     new HtmlWebPackPlugin({
       template: path.join(__dirname, 'src', 'index.html'),
     }),
