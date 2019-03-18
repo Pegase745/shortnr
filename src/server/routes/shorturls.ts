@@ -3,7 +3,7 @@ import * as fp from 'fastify-plugin';
 import * as http from 'http';
 import * as getUUID from 'uuid-by-string';
 
-import { formatURL } from '../utils';
+import { formatURL, isValidURL } from '../utils';
 
 export default fp(async (server, opts, next) => {
   /**
@@ -72,6 +72,11 @@ export default fp(async (server, opts, next) => {
     try {
       const redirectURL = request.body.redirectURL;
       const formattedRedirectURL = formatURL(redirectURL);
+
+      if (!isValidURL(formattedRedirectURL)) {
+        throw new Error(`${formattedRedirectURL} is not a valid URL`);
+      }
+
       const shortURL = getUUID(redirectURL);
 
       await server.redis.set(shortURL, formattedRedirectURL);
@@ -82,7 +87,7 @@ export default fp(async (server, opts, next) => {
         .send();
     } catch (err) {
       request.log.error(err);
-      return reply.code(400).send({ error: err });
+      return reply.code(400).send({ error: String(err) });
     }
   };
 

@@ -6,6 +6,7 @@ import { Input } from 'semantic-ui-react';
 
 import Layout from '../components/Layout';
 import AlertCopy from './components/AlertCopy';
+import AlertError from './components/AlertError';
 import Header from './components/Header';
 import ShortURL from './components/ShortURL';
 import { getShortenedFullURL } from './utils';
@@ -14,6 +15,7 @@ interface IState {
   redirectURL: string;
   shortURL: string;
   isWorking: boolean;
+  error: string;
 }
 
 class Home extends React.Component<RouteComponentProps, IState> {
@@ -21,6 +23,7 @@ class Home extends React.Component<RouteComponentProps, IState> {
     redirectURL: '',
     shortURL: '',
     isWorking: false,
+    error: '',
   };
 
   public inputRef;
@@ -53,12 +56,23 @@ class Home extends React.Component<RouteComponentProps, IState> {
         const fullURL = getShortenedFullURL(this.props.location.href, shortURL);
         copyToClipboard(fullURL);
       })
+      .catch(err => {
+        if (err.response && err.response.data.error) {
+          this.setState({ error: err.response.data.error });
+        }
+      })
       .finally(() => {
         this.setState({ isWorking: false });
       });
   };
 
   public handleChange = event => {
+    if (!!this.state.error) {
+      this.setState({
+        error: '',
+      });
+    }
+
     this.setState({
       redirectURL: event.target.value,
     });
@@ -102,11 +116,15 @@ class Home extends React.Component<RouteComponentProps, IState> {
   }
 
   public renderFlashMessage() {
-    if (this.state.isWorking || !this.state.shortURL) {
-      return null;
+    if (!!this.state.error) {
+      return <AlertError error={this.state.error} />;
     }
 
-    return <AlertCopy />;
+    if (!this.state.isWorking && this.state.shortURL) {
+      return <AlertCopy />;
+    }
+
+    return null;
   }
 
   public render() {
