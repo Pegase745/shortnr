@@ -10,7 +10,7 @@ class Redir extends React.Component<IProps> {
     axios.get(`/api/shorturls/${this.props.shortURL}`).then(res => {
       setTimeout(() => {
         window.location.assign(res.data.redirectURL);
-      }, 1000);
+      }, 300);
     });
   }
 
