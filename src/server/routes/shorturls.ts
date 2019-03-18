@@ -3,7 +3,7 @@ import * as fp from 'fastify-plugin';
 import * as http from 'http';
 import * as getUUID from 'uuid-by-string';
 
-import { formatURL, isValidURL } from '../utils';
+import { formatURL, getShortenedFullURL, isValidURL } from '../utils';
 
 export default fp(async (server, opts, next) => {
   /**
@@ -83,7 +83,10 @@ export default fp(async (server, opts, next) => {
 
       return reply
         .code(201)
-        .header('Location-Id', shortURL)
+        .header(
+          'Location-Id',
+          getShortenedFullURL(request.headers.origin, shortURL)
+        )
         .send();
     } catch (err) {
       request.log.error(err);

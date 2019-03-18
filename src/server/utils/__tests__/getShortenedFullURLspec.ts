@@ -7,7 +7,7 @@ describe('getShortenedFullURL', () => {
   });
 
   it('should return a full URL when both hostname and short URL are provided', () => {
-    const shortened = getShortenedFullURL('https://website.com/', 'poe');
+    const shortened = getShortenedFullURL('https://website.com', 'poe');
     expect(shortened).toEqual('https://website.com/r/poe');
   });
 });
