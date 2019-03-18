@@ -9,7 +9,6 @@ import AlertCopy from './components/AlertCopy';
 import AlertError from './components/AlertError';
 import Header from './components/Header';
 import ShortURL from './components/ShortURL';
-import { getShortenedFullURL } from './utils';
 
 interface IState {
   redirectURL: string;
@@ -52,9 +51,7 @@ class Home extends React.Component<RouteComponentProps, IState> {
       .then(res => {
         const shortURL = res.headers['location-id'];
         this.setState({ shortURL });
-
-        const fullURL = getShortenedFullURL(this.props.location.href, shortURL);
-        copyToClipboard(fullURL);
+        copyToClipboard(shortURL);
       })
       .catch(err => {
         if (err.response && err.response.data.error) {
@@ -104,12 +101,7 @@ class Home extends React.Component<RouteComponentProps, IState> {
         {this.renderFlashMessage()}
 
         {this.state.shortURL !== '' && (
-          <ShortURL
-            fullURL={getShortenedFullURL(
-              this.props.location.href,
-              this.state.shortURL
-            )}
-          />
+          <ShortURL fullURL={this.state.shortURL} />
         )}
       </React.Fragment>
     );
