@@ -6,7 +6,7 @@ import { parse as parseURL } from 'url';
  * @param {string} rawURL e.g. website.com, http://website.com
  * @return {string}
  */
-export function formatURL(rawURL: string): string {
+const formatURL = (rawURL: string): string => {
   const parsed = parseURL(rawURL);
 
   if (!!parsed.protocol) {
@@ -14,4 +14,6 @@ export function formatURL(rawURL: string): string {
   }
 
   return `http://${rawURL}`;
-}
+};
+
+export default formatURL;

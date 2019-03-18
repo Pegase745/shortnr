@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlertError.tsx should render 1`] = `
+<Message
+  error={true}
+  header="A big error"
+/>
+`;
