@@ -1,13 +1,13 @@
-import * as url from '../url';
+import getShortenedFullURL from '../getShortenedFullURL';
 
 describe('getShortenedFullURL', () => {
   it('should not return a URL when an argument is empty', () => {
-    expect(url.getShortenedFullURL('', 'a')).toEqual('');
-    expect(url.getShortenedFullURL('a', '')).toEqual('');
+    expect(getShortenedFullURL('', 'a')).toEqual('');
+    expect(getShortenedFullURL('a', '')).toEqual('');
   });
 
   it('should return a full URL when both hostname and short URL are provided', () => {
-    const shortened = url.getShortenedFullURL('https://website.com/', 'poe');
+    const shortened = getShortenedFullURL('https://website.com/', 'poe');
     expect(shortened).toEqual('https://website.com/r/poe');
   });
 });

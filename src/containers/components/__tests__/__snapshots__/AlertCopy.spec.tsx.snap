@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlertCopy.tsx should render 1`] = `
+<Message
+  content="Your shortened URL was copied to your clipboard!"
+  success={true}
+/>
+`;
