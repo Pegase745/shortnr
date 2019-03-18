@@ -19,7 +19,7 @@ exports[`ShortURL.tsx should render 1`] = `
             "onClick": [Function],
           }
         }
-        defaultValue="https://shortnr.localr/shortURL"
+        defaultValue="https://shortnr.local/r/shortURL"
         fluid={true}
         readOnly={true}
         type="text"

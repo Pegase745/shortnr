@@ -3,13 +3,12 @@ import * as React from 'react';
 import { Grid, Input, Segment } from 'semantic-ui-react';
 
 interface IShortURLProps {
-  shortURL: string;
-  hostName: string;
+  fullURL: string;
 }
 
-const ShortURL: React.FC<IShortURLProps> = ({ shortURL, hostName }) => {
+const ShortURL: React.FC<IShortURLProps> = ({ fullURL }) => {
   const [copied, setCopied] = React.useState(false);
-  const fullURL = `${hostName}r/${shortURL}`;
+
   const handleClick = () => {
     copyToClipboard(fullURL);
     setCopied(true);
