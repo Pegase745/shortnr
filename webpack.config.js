@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
@@ -67,7 +68,7 @@ module.exports = {
       // Bundle images referenced in CSS files
       {
         test: /\.(png)$/,
-        loader: 'file-loader?limit=100000&name=images/[name].[ext]',
+        loader: 'file-loader?limit=100000&name=assets/[name].[ext]',
       },
     ],
   },
@@ -76,7 +77,7 @@ module.exports = {
       filename: isDev ? 'index.css' : 'index.[contenthash].css',
     }),
     new HtmlWebPackPlugin({
-      template: path.join(__dirname, 'src', 'index.html'),
+      template: path.join(__dirname, 'public', 'index.html'),
     }),
     !isDev && new webpack.optimize.AggressiveMergingPlugin(),
     isDev && new webpack.HotModuleReplacementPlugin(),
@@ -95,6 +96,12 @@ module.exports = {
         threshold: 10240,
         minRatio: 0.7,
       }),
+    new CopyPlugin([
+      {
+        from: 'public/assets',
+        to: 'assets',
+      },
+    ]),
   ].filter(Boolean),
   devServer: {
     contentBase: path.join(__dirname, 'src'),

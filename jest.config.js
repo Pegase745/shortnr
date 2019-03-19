@@ -13,15 +13,19 @@ module.exports = {
     '/__jest__/',
     '.?.min.js',
   ],
-  moduleDirectories: ['node_modules', 'src'],
+  globals: {
+    'ts-jest': {
+      diagnostics: {
+        ignoreCodes: [2339],
+      },
+    },
+  },
+  moduleDirectories: ['node_modules', 'src', 'server'],
   moduleNameMapper: {
     '\\.(css|scss|sass|less)$': 'identity-obj-proxy',
   },
   setupFiles: ['./tests/setupEnzyme.ts'],
   setupFilesAfterEnv: ['./tests/setupMatchers.ts'],
-  globals: {
-    CONFIG: {},
-  },
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },

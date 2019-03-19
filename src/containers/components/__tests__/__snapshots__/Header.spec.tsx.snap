@@ -1,28 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header.tsx should render 1`] = `
-<Fragment>
-  <Header
-    as="h1"
-    content="Shortnr"
+<Segment
+  basic={true}
+>
+  <Image
+    as="img"
+    centered={true}
+    fluid={true}
+    src="assets/logo.png"
     style={
       Object {
-        "marginBottom": 0,
-        "marginTop": "3em",
+        "paddingTop": "4em",
+        "width": "50%",
       }
     }
-    textAlign="center"
+    ui={true}
   />
-  <Header
-    style={
-      Object {
-        "marginBottom": "2em",
-        "marginTop": 0,
-      }
-    }
-    textAlign="center"
-  >
-    A simple URL shortener. Why? Well.. Why not?
-  </Header>
-</Fragment>
+</Segment>
 `;
