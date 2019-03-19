@@ -14,21 +14,18 @@
   "engines": {
     "node": "^8 || ^10"
   },
-  "files": [
-    "/dist",
-    "/bin/shortnr.js"
-  ],
+  "files": ["/dist", "/bin/shortnr.js"],
   "scripts": {
     "start": "concurrently npm:start:*",
     "start:dev": "cross-env NODE_ENV=development webpack-dev-server",
-    "start:server": "cross-env tsnd --respawn --transpileOnly src/server",
+    "start:server": "cross-env tsnd --respawn --transpileOnly server",
     "build:dev": "npm run clean && cross-env NODE_ENV=development webpack --config webpack.config.js",
     "build:prod": "npm run clean && cross-env NODE_ENV=production webpack --config webpack.config.js && npm run build:server",
-    "build:server": "cross-env tsc --project tsconfig.server.json",
+    "build:server": "cross-env tsc --project server/tsconfig.json",
     "serve": "npm run build:prod && NODE_ENV=production node dist/server/index.js",
     "clean": "rimraf dist",
-    "lint": "tslint --project tsconfig.json",
-    "format": "prettier --write 'src/**/*.{ts,tsx}'",
+    "lint": "tslint --project tsconfig.json && tslint --project server/tsconfig.json",
+    "format": "prettier --write 'src/**/*.{ts,tsx}' 'server/**/*.{ts,tsx}'",
     "test": "jest --verbose",
     "coverage": "jest --coverage"
   },

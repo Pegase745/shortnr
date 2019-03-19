@@ -15,7 +15,7 @@ module.exports = {
   ],
   moduleDirectories: ['node_modules', 'src'],
   moduleNameMapper: {
-    '\\.(css|scss|sass)$': 'identity-obj-proxy',
+    '\\.(css|scss|sass|less)$': 'identity-obj-proxy',
   },
   setupFiles: ['./tests/setupEnzyme.ts'],
   setupFilesAfterEnv: ['./tests/setupMatchers.ts'],

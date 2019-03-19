@@ -21,7 +21,7 @@ describe('Redir.tsx', () => {
     jest.clearAllMocks();
   });
 
-  it('should get the redirect URL on mount', (done) => {
+  it('should get the redirect URL on mount', done => {
     window.location.assign = jest.fn();
     shallow(<Redir {...defaultProps} />);
 

@@ -1,7 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Layout.tsx should render 1`] = `
-<Container>
-  Test
-</Container>
+<Fragment>
+  <Container>
+    Test
+  </Container>
+  <GithubCorner
+    ariaLabel="Open GitHub project"
+    bannerColor="#4974BE"
+    direction="right"
+    href="https://github.com/Pegase745/shortnr#readme"
+    octoColor="#fff"
+    size={80}
+  />
+</Fragment>
 `;

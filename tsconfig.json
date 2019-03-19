@@ -14,7 +14,8 @@
   "exclude": [
     "node_modules",
     "config",
-    "dist"
+    "dist",
+    "server"
   ],
   "awesomeTypescriptLoaderOptions": {
     "silent": true

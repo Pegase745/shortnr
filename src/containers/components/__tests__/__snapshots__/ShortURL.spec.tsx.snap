@@ -14,7 +14,6 @@ exports[`ShortURL.tsx should render 1`] = `
       <Input
         action={
           Object {
-            "color": "teal",
             "icon": "copy",
             "onClick": [Function],
           }
