@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/assets/logo.png">
+  <img src="public/assets/logo.png" style="width: 50%;">
 </p>
 
 <p align="center">
@@ -14,13 +14,13 @@
         <img src="https://travis-ci.com/Pegase745/shortnr.svg?branch=master" alt="Travis CI">
     </a>
     <a href="https://www.codacy.com/app/Pegase745/shortnr">
-        <img src="https://api.codacy.com/project/badge/Grade/0e235cc8b4374d839d482eeb13405599" alt="Travis CI">
+        <img src="https://api.codacy.com/project/badge/Grade/0e235cc8b4374d839d482eeb13405599" alt="Code quality">
     </a>
     <a href="https://codecov.io/gh/Pegase745/shortnr">
-        <img src="https://codecov.io/gh/Pegase745/shortnr/branch/master/graph/badge.svg" alt="Travis CI">
+        <img src="https://codecov.io/gh/Pegase745/shortnr/branch/master/graph/badge.svg" alt="Coverage">
     </a>
     <a href="https://microbadger.com/images/pegase/shortnr">
-        <img src="https://images.microbadger.com/badges/image/pegase/shortnr.svg" alt="Travis CI">
+        <img src="https://images.microbadger.com/badges/image/pegase/shortnr.svg" alt="Docker image size">
     </a>
 </p>
 
