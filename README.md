@@ -1,12 +1,29 @@
-# shortnr
+<p align="center">
+  <img src="public/assets/logo.png">
+</p>
 
-[![Npm Version](https://img.shields.io/npm/v/shortnr.svg)](https://www.npmjs.com/package/shortnr)
-[![Build Status](https://travis-ci.com/Pegase745/shortnr.svg?branch=master)](https://travis-ci.com/Pegase745/shortnr)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0e235cc8b4374d839d482eeb13405599)](https://www.codacy.com/app/Pegase745/shortnr)
-[![Codecov](https://codecov.io/gh/Pegase745/shortnr/branch/master/graph/badge.svg)](https://codecov.io/gh/Pegase745/shortnr)
-[![MicroBadger](https://images.microbadger.com/badges/image/pegase/shortnr.svg)](https://microbadger.com/images/pegase/shortnr)
+<p align="center">
+    Simple URL shortener written in TypeScript and backed by Redis.
+</p>
 
-Simple URL shortener written in TypeScript and backed by Redis.
+<p align="center">
+    <a href="https://www.npmjs.com/package/shortnr">
+        <img src="https://img.shields.io/npm/v/shortnr.svg" alt="NPM">
+    </a>
+    <a href="https://travis-ci.com/Pegase745/shortnr">
+        <img src="https://travis-ci.com/Pegase745/shortnr.svg?branch=master" alt="Travis CI">
+    </a>
+    <a href="https://www.codacy.com/app/Pegase745/shortnr">
+        <img src="https://api.codacy.com/project/badge/Grade/0e235cc8b4374d839d482eeb13405599" alt="Travis CI">
+    </a>
+    <a href="https://codecov.io/gh/Pegase745/shortnr">
+        <img src="https://codecov.io/gh/Pegase745/shortnr/branch/master/graph/badge.svg" alt="Travis CI">
+    </a>
+    <a href="https://microbadger.com/images/pegase/shortnr">
+        <img src="https://images.microbadger.com/badges/image/pegase/shortnr.svg" alt="Travis CI">
+    </a>
+</p>
+
 
 ## Usage
 
