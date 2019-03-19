@@ -74,11 +74,16 @@ describe('/api/shorturls', () => {
       const response = await server.inject({
         method: 'POST',
         url: '/api/shorturls',
-        payload: { redirectURL: 'redirectURL' },
+        payload: { redirectURL: 'http://domain.tld' },
+        headers: {
+          origin: 'http://shortnr',
+        },
       });
 
       expect(response.statusCode).toEqual(201);
-      expect(response.headers['location-id']).toEqual('someUniqShortURL');
+      expect(response.headers['location-id']).toEqual(
+        'http://shortnr/r/someUniqShortURL'
+      );
       done();
     });
 
@@ -92,7 +97,11 @@ describe('/api/shorturls', () => {
       });
 
       expect(response.statusCode).toEqual(400);
-      expect(response.payload).toEqual(JSON.stringify({ error: 'My error' }));
+      expect(response.payload).toEqual(
+        JSON.stringify({
+          error: 'Error: http://redirecturl is not a valid URL',
+        })
+      );
       done();
     });
   });

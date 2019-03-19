@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { shallow } from 'enzyme';
+import * as copyToClipboard from 'copy-to-clipboard';
+import { mount, shallow } from 'enzyme';
 import * as React from 'react';
 
 import Home from '../Home';
@@ -11,6 +12,8 @@ jest.mock('axios', () => ({
     ),
   },
 }));
+
+jest.mock('copy-to-clipboard');
 
 describe('Home.tsx', () => {
   beforeEach(() => {
@@ -26,14 +29,17 @@ describe('Home.tsx', () => {
     expect(wrapper.state('redirectURL')).toEqual('https://redirect.url');
   });
 
-  xit('should set shortURL in the state', done => {
-    const wrapper = shallow(<Home />);
+  it('should set shortURL in the state', done => {
+    const wrapper = mount(<Home />);
 
+    wrapper.setState({ redirectURL: 'http://redirect.url' });
+    expect(wrapper.state('isWorking')).toBeFalsy();
     wrapper.find('Button').simulate('click');
     expect(wrapper.state('isWorking')).toBeTruthy();
 
     process.nextTick(() => {
       expect(axios.post).toBeCalledTimes(1);
+      expect(copyToClipboard).toBeCalledTimes(1);
       expect(wrapper.state('shortURL')).toEqual('shortURL');
       expect(wrapper.state('isWorking')).toBeFalsy();
       done();
