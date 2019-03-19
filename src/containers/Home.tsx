@@ -2,22 +2,13 @@ import { RouteComponentProps } from '@reach/router';
 import axios from 'axios';
 import * as copyToClipboard from 'copy-to-clipboard';
 import * as React from 'react';
-import { Header, Input, Message } from 'semantic-ui-react';
+import { Input } from 'semantic-ui-react';
 
 import Layout from '../components/Layout';
+import AlertCopy from './components/AlertCopy';
+import Header from './components/Header';
 import ShortURL from './components/ShortURL';
 import { getShortenedFullURL } from './utils';
-
-const style = {
-  h1: {
-    marginTop: '3em',
-    marginBottom: 0,
-  },
-  sub: {
-    marginTop: 0,
-    marginBottom: '2em',
-  },
-};
 
 interface IState {
   redirectURL: string;
@@ -115,21 +106,13 @@ class Home extends React.Component<RouteComponentProps, IState> {
       return null;
     }
 
-    return (
-      <Message
-        success={true}
-        content="Your shortened URL was copied to your clipboard!"
-      />
-    );
+    return <AlertCopy />;
   }
 
   public render() {
     return (
       <Layout>
-        <Header as="h1" content="Shortnr" style={style.h1} textAlign="center" />
-        <Header textAlign="center" style={style.sub}>
-          A simple URL shortener. Why? Well.. Why not?
-        </Header>
+        <Header />
         {this.renderField()}
       </Layout>
     );

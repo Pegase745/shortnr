@@ -1,1 +1,3 @@
-export * from './url';
+import getShortenedFullURL from './getShortenedFullURL';
+
+export { getShortenedFullURL };
