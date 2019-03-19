@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 
-import 'semantic-ui-css/semantic.min.css';
-// tslint:disable-next-line:ordered-imports
+import '../theme/semantic.less';
 import App from './App';
 
 export const moduleHotAccept = (module?: NodeModule) => {

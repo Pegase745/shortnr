@@ -16,7 +16,6 @@ const ShortURL: React.FC<IShortURLProps> = ({ fullURL }) => {
   };
 
   const actionProps = {
-    color: 'teal',
     icon: 'copy',
     onClick: handleClick,
   };

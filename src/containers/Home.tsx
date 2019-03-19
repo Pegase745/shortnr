@@ -86,7 +86,6 @@ class Home extends React.Component<RouteComponentProps, IState> {
           icon="linkify"
           iconPosition="left"
           action={{
-            color: 'teal',
             content: 'Shorten',
             disabled: !this.state.redirectURL,
             loading: this.state.isWorking,

@@ -24,6 +24,7 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
       react: path.resolve(path.join(__dirname, './node_modules/react')),
+      '../../theme.config$': path.join(__dirname, 'theme/theme.config'),
     },
   },
   module: {
@@ -36,8 +37,8 @@ module.exports = {
         exclude: [path.resolve(__dirname, 'node_modules')],
       },
       {
-        // Bundle all imported '.css' files
-        test: /\.css$/,
+        // Bundle all imported '.less' files
+        test: /\.less$/,
         use: [
           {
             // Create style nodes from JS strings
@@ -51,6 +52,9 @@ module.exports = {
           {
             // Keep only woff2 fonts
             loader: 'postcss-loader',
+          },
+          {
+            loader: 'less-loader',
           },
         ],
       },

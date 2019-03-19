@@ -1,0 +1,5 @@
+@backgroundColor: #86B3FF;
+@fontWeight: @bold;
+@textColor: white;
+@hoveredTextColor: white;
+@hoverBackgroundColor: #4974BE;
