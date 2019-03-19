@@ -1,9 +1,11 @@
 import * as fastify from 'fastify';
 import * as fp from 'fastify-plugin';
 import * as http from 'http';
+import normalize from 'normalize-url';
 import * as getUUID from 'uuid-by-string';
+import * as validator from 'validator';
 
-import { formatURL, getShortenedFullURL, isValidURL } from '../utils';
+import { getShortenedFullURL } from '../utils';
 
 export default fp(async (server, opts, next) => {
   /**
@@ -71,9 +73,9 @@ export default fp(async (server, opts, next) => {
   ) => {
     try {
       const redirectURL = request.body.redirectURL;
-      const formattedRedirectURL = formatURL(redirectURL);
+      const formattedRedirectURL = normalize(redirectURL);
 
-      if (!isValidURL(formattedRedirectURL)) {
+      if (!validator.isURL(formattedRedirectURL)) {
         throw new Error(`${formattedRedirectURL} is not a valid URL`);
       }
 

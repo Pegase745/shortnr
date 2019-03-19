@@ -92,6 +92,7 @@
     "fastify-redis": "^3.0.0",
     "fastify-static": "^2.3.4",
     "memoize-one": "^5.0.0",
+    "normalize-url": "^4.2.0",
     "pino-pretty": "^2.5.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
