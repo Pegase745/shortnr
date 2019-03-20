@@ -11,6 +11,7 @@ exports[`Header.tsx should render 1`] = `
     src="assets/logo.png"
     style={
       Object {
+        "maxWidth": 200,
         "paddingTop": "4em",
         "width": "50%",
       }
