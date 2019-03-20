@@ -5,6 +5,7 @@ const style = {
   img: {
     paddingTop: '4em',
     width: '50%',
+    maxWidth: 200,
   },
 };
 
