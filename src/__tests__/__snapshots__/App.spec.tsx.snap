@@ -8,6 +8,9 @@ exports[`App.tsx should render 1`] = `
   <Redir
     path="/r/:shortURL"
   />
+  <Redir
+    path="/:shortURL"
+  />
   <Component
     default={true}
   />

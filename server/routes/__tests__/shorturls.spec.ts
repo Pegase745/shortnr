@@ -83,7 +83,7 @@ describe('/api/shorturls', () => {
 
       expect(response.statusCode).toEqual(201);
       expect(response.headers['location-id']).toEqual(
-        'http://shortnr/r/someUniqShortURL'
+        'http://shortnr/someUniqShortURL'
       );
       done();
     });

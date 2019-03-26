@@ -5,8 +5,6 @@ import normalize from 'normalize-url';
 import * as getUUID from 'uuid-by-string';
 import * as validator from 'validator';
 
-import { getShortenedFullURL } from '../utils';
-
 export default fp(async (server, opts, next) => {
   /**
    * GET /api/shorturls/:shortURL
@@ -85,10 +83,7 @@ export default fp(async (server, opts, next) => {
 
       return reply
         .code(201)
-        .header(
-          'Location-Id',
-          getShortenedFullURL(request.headers.origin, shortURL)
-        )
+        .header('Location-Id', `${request.headers.origin}/${shortURL}`)
         .send();
     } catch (err) {
       request.log.error(err);

@@ -16,7 +16,9 @@ const App = () => {
   return (
     <Router>
       <Home path="/" />
+      {/* Deprecated route that will be removed in 1.0.0 release */}
       <Redir path="/r/:shortURL" />
+      <Redir path="/:shortURL" />
       <NotFound default={true} />
     </Router>
   );
