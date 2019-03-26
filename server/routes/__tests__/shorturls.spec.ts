@@ -1,6 +1,7 @@
 import * as fastify from 'fastify';
 import * as http from 'http';
 
+import { serverOptions } from '../../server';
 import shortUrlsRoutes from '../shorturls';
 
 jest.mock('uuid-by-string', () => () => 'someUniqShortURL');
@@ -13,7 +14,7 @@ describe('/api/shorturls', () => {
   >;
 
   beforeEach(async () => {
-    server = fastify({});
+    server = fastify(serverOptions);
     server.register(require('fastify-redis'), {
       host: '',
     });
@@ -24,7 +25,7 @@ describe('/api/shorturls', () => {
   });
 
   afterAll(() => {
-    server.close(() => null);
+    server.close.bind(server);
   });
 
   describe('GET /:shortURL', () => {

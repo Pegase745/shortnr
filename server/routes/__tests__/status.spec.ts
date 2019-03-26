@@ -1,6 +1,7 @@
 import * as fastify from 'fastify';
 import * as http from 'http';
 
+import { serverOptions } from '../../server';
 import statusRoutes from '../status';
 
 describe('/api/status', () => {
@@ -11,7 +12,7 @@ describe('/api/status', () => {
   >;
 
   beforeEach(async () => {
-    server = fastify({});
+    server = fastify(serverOptions);
     server.register(statusRoutes);
     await server.ready();
 
@@ -19,7 +20,7 @@ describe('/api/status', () => {
   });
 
   afterAll(() => {
-    server.close(() => null);
+    server.close();
   });
 
   describe('GET /', () => {
