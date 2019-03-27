@@ -1,11 +1,21 @@
 import * as fastify from 'fastify';
 import * as fp from 'fastify-plugin';
 import * as http from 'http';
+import {
+  InternalServerError,
+  NotFound,
+  UnprocessableEntity,
+} from 'http-errors';
 import normalize from 'normalize-url';
-import * as getUUID from 'uuid-by-string';
 import * as validator from 'validator';
 
+import ShortURL from '../entities/ShortURL';
+import ShortURLService from '../services/ShortURLService';
+
 export default fp(async (server, opts, next) => {
+  const db = server.db;
+  const shortURLService = new ShortURLService(db.getRepository(ShortURL));
+
   /**
    * GET /api/shorturls/:shortURL
    * Retrieve a redirect url for a given short url.
@@ -26,19 +36,19 @@ export default fp(async (server, opts, next) => {
     reply: fastify.FastifyReply<http.ServerResponse>
   ) => {
     try {
-      const redirectURL = await server.redis.get(request.params.shortURL);
+      const shortURL = await shortURLService.findById(request.params.shortURL);
 
-      if (!redirectURL) {
-        return reply.code(404);
+      if (!shortURL) {
+        return new NotFound();
       }
 
       return reply
         .code(200)
         .header('Content-Type', 'application/json')
-        .send({ redirectURL });
+        .send({ redirectURL: shortURL.url });
     } catch (err) {
       request.log.error(err);
-      return reply.code(400).send({ error: err });
+      return new InternalServerError(String(err));
     }
   };
 
@@ -74,20 +84,31 @@ export default fp(async (server, opts, next) => {
       const formattedRedirectURL = normalize(redirectURL);
 
       if (!validator.isURL(formattedRedirectURL)) {
-        throw new Error(`${formattedRedirectURL} is not a valid URL`);
+        return new UnprocessableEntity(
+          `${formattedRedirectURL} is not a valid URL`
+        );
       }
 
-      const shortURL = getUUID(redirectURL);
+      const existingShortURL = await shortURLService.findByURL(
+        formattedRedirectURL
+      );
 
-      await server.redis.set(shortURL, formattedRedirectURL);
+      let headerUrl: string;
+
+      if (!existingShortURL) {
+        const shortURL = await shortURLService.create(formattedRedirectURL);
+        headerUrl = shortURL.id;
+      } else {
+        headerUrl = existingShortURL.id;
+      }
 
       return reply
         .code(201)
-        .header('Location-Id', `${request.headers.origin}/${shortURL}`)
+        .header('Location-Id', `${server.config.get('hostname')}/${headerUrl}`)
         .send();
     } catch (err) {
       request.log.error(err);
-      return reply.code(400).send({ error: String(err) });
+      return new InternalServerError(String(err));
     }
   };
 

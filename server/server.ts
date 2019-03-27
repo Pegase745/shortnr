@@ -4,8 +4,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import fastifyConfig from './config';
-import shorturlsRoutes from './routes/shorturls';
-import statusRoutes from './routes/status';
+import shortURLRoutes from './controllers/shortURL';
+import statusRoutes from './controllers/status';
+import dbPlugin from './db';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -24,15 +25,11 @@ export async function bootstrap() {
   server.register(require('fastify-no-icon'));
   // tslint:disable-next-line:no-var-requires
   server.register(require('fastify-helmet'));
-  // tslint:disable-next-line:no-var-requires
-  server.register(require('fastify-redis'), {
-    host: config.get('redis.host'),
-    port: config.get('redis.port'),
-  });
 
   server.register(fastifyConfig, config);
+  server.register(dbPlugin).ready();
   server.register(statusRoutes);
-  server.register(shorturlsRoutes);
+  server.register(shortURLRoutes);
 
   if (!isProduction) {
     // tslint:disable-next-line:no-var-requires

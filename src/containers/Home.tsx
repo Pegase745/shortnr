@@ -54,8 +54,8 @@ class Home extends React.Component<RouteComponentProps, IState> {
         copyToClipboard(shortURL);
       })
       .catch(err => {
-        if (err.response && err.response.data.error) {
-          this.setState({ error: err.response.data.error });
+        if (err.response && err.response.data.message) {
+          this.setState({ error: err.response.data.message });
         }
       })
       .finally(() => {

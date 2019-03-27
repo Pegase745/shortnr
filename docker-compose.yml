@@ -12,16 +12,16 @@ services:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./docker/certs:/certs
 
-  redis:
-    image: redis
-    command: redis-server /usr/local/etc/redis/redis.conf
-    volumes:
-      - ./docker/redis/data:/data
-      - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
+  db:
+    image: postgres
+    # volumes:
+    #   - ./docker/db/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: shortnr
     ports:
-      - '6379:6739'
-    logging:
-      driver: none
+      - 5432:5432
 
   app:
     build: .
@@ -32,6 +32,6 @@ services:
     volumes:
       - .:/srv/shortnr:rw
     links:
-      - redis:redis.local
+      - db:db.local
     depends_on:
-      - redis
+      - db

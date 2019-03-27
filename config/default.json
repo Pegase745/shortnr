@@ -1,10 +1,14 @@
 {
+  "hostname": "https://shortnr.local",
   "server": {
     "port": 3000,
     "host": "0.0.0.0"
   },
-  "redis": {
-    "host": "redis.local",
-    "port": 6379
+  "db": {
+    "host": "db.local",
+    "port": 5432,
+    "username": "postgres",
+    "password": "postgres",
+    "logging": false
   }
 }
