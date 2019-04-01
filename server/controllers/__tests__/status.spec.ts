@@ -1,15 +1,10 @@
 import * as fastify from 'fastify';
-import * as http from 'http';
 
 import { serverOptions } from '../../server';
 import statusRoutes from '../status';
 
 describe('/api/status', () => {
-  let server: fastify.FastifyInstance<
-    http.Server,
-    http.IncomingMessage,
-    http.ServerResponse
-  >;
+  let server: fastify.FastifyInstance;
 
   beforeEach(async () => {
     server = fastify(serverOptions);
@@ -20,7 +15,7 @@ describe('/api/status', () => {
   });
 
   afterAll(() => {
-    server.close();
+    server.close.bind(server);
   });
 
   describe('GET /', () => {

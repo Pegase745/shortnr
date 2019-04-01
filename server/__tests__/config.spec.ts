@@ -1,26 +1,21 @@
 import * as fastify from 'fastify';
-import * as http from 'http';
-import * as https from 'https';
 
-import config from '../config';
+import fastifyConfig from '../config';
+import { serverOptions } from '../server';
 
 describe('server/config', () => {
-  let server: fastify.FastifyInstance<
-    https.Server,
-    http.IncomingMessage,
-    http.ServerResponse
-  >;
+  let server: fastify.FastifyInstance;
 
   beforeEach(async () => {
-    server = fastify({});
-    server.register(config, {});
+    server = fastify(serverOptions);
+    server.register(fastifyConfig, {});
     await server.ready();
 
     jest.clearAllMocks();
   });
 
   afterAll(() => {
-    server.close(() => null);
+    server.close.bind(server);
   });
 
   it('should have a config object', () => {

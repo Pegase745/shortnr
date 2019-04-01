@@ -5,7 +5,7 @@ import * as typeorm from 'typeorm';
 import fastifyConfig from '../../config';
 import dbPlugin from '../../db';
 import { serverOptions } from '../../server';
-import MockShortURLService from '../../services/__tests__/utils/MockShortURLService';
+import MockShortURLService from '../../services/__mocks__/ShortURLService';
 import shortURLRoutes from '../shortURL';
 
 jest.spyOn(typeorm, 'createConnection').mockResolvedValue({
@@ -55,7 +55,7 @@ describe('/api/shorturls', () => {
     it('should return a 404', async done => {
       const response = await server.inject({
         method: 'GET',
-        url: '/api/shorturls',
+        url: '/api/shorturls/shortURL',
       });
 
       expect(response.statusCode).toEqual(404);

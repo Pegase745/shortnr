@@ -1,11 +1,10 @@
-// tslint:disable-next-line:interface-name
-interface ShortURLEntry {
+interface IShortURLEntry {
   id: string;
   url: string;
 }
 
-export default class MockShortURLService {
-  public database: ShortURLEntry[];
+export default class ShortURLService {
+  public database: IShortURLEntry[];
   public shouldThrowError: boolean;
   public forceThrowErrorMessage: string;
   public defaultId?: string;
@@ -25,7 +24,7 @@ export default class MockShortURLService {
 
   public async create(url: string, withId?: string) {
     const id = this.defaultId || withId || '' + Math.random();
-    const shortURL: ShortURLEntry = {
+    const shortURL: IShortURLEntry = {
       id,
       url,
     };
@@ -38,7 +37,7 @@ export default class MockShortURLService {
       throw new Error(this.forceThrowErrorMessage);
     }
 
-    return this.database.find((entry: ShortURLEntry) => {
+    return this.database.find((entry: IShortURLEntry) => {
       return entry.id === id;
     });
   }
@@ -48,7 +47,7 @@ export default class MockShortURLService {
       throw new Error(this.forceThrowErrorMessage);
     }
 
-    return this.database.find((entry: ShortURLEntry) => {
+    return this.database.find((entry: IShortURLEntry) => {
       return entry.url === url;
     });
   }
