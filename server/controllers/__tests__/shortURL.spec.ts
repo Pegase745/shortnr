@@ -5,15 +5,21 @@ import * as typeorm from 'typeorm';
 import fastifyConfig from '../../config';
 import dbPlugin from '../../db';
 import { serverOptions } from '../../server';
+import MockShortURLService from '../../services/__tests__/utils/MockShortURLService';
 import shortURLRoutes from '../shortURL';
 
-jest.mock('shortid', () => () => 'someUniqShortURL');
-jest
-  .spyOn(typeorm, 'createConnection')
-  .mockResolvedValue({ runMigrations: jest.fn() } as any);
+jest.spyOn(typeorm, 'createConnection').mockResolvedValue({
+  runMigrations: jest.fn(),
+  getRepository: jest.fn(),
+} as any);
 
-describe('/api/shortURL', () => {
-  let server;
+const mockedShortURLService = new MockShortURLService();
+jest.mock('../../services/ShortURLService', () => ({
+  default: () => mockedShortURLService,
+}));
+
+describe('/api/shorturls', () => {
+  let server: fastify.FastifyInstance;
 
   beforeEach(async () => {
     server = fastify(serverOptions);
@@ -22,7 +28,7 @@ describe('/api/shortURL', () => {
     server.register(shortURLRoutes);
     await server.ready();
 
-    jest.clearAllMocks();
+    mockedShortURLService.reset();
   });
 
   afterAll(() => {
@@ -31,51 +37,55 @@ describe('/api/shortURL', () => {
 
   describe('GET /:shortURL', () => {
     it('should return a 200', async done => {
+      mockedShortURLService.createWithId('shortURL', 'shortnr.local');
+
       const response = await server.inject({
         method: 'GET',
-        url: '/api/shortURL/shortURL',
+        url: '/api/shorturls/shortURL',
       });
 
       expect(response.statusCode).toEqual(200);
-      expect(response.payload).toEqual(
-        JSON.stringify({ redirectURL: 'redirectURL' })
-      );
+
+      const parsedPayload = JSON.parse(response.payload);
+      expect(parsedPayload).toHaveProperty('redirectURL');
+      expect(parsedPayload.redirectURL).toEqual('shortnr.local');
       done();
     });
 
-    xit('should return a 404', async done => {
+    it('should return a 404', async done => {
       const response = await server.inject({
         method: 'GET',
-        url: '/api/shortURL',
+        url: '/api/shorturls',
       });
 
       expect(response.statusCode).toEqual(404);
       done();
     });
 
-    xit('should return a 400', async done => {
-      server.db.getRepository.findOne = jest.fn(() =>
-        Promise.reject('My error')
-      );
+    it('should return a 500', async done => {
+      mockedShortURLService.activateThrowErrorMode();
 
       const response = await server.inject({
         method: 'GET',
-        url: '/api/shortURL/shortURL',
+        url: '/api/shorturls/shortURL',
       });
 
-      expect(response.statusCode).toEqual(400);
-      expect(response.payload).toEqual(JSON.stringify({ error: 'My error' }));
+      expect(response.statusCode).toEqual(500);
+
+      const parsedPayload = JSON.parse(response.payload);
+      expect(parsedPayload).toHaveProperty('message');
+      expect(parsedPayload.message).toContain('Error');
       done();
     });
   });
 
-  xdescribe('POST /', () => {
+  describe('POST /', () => {
     it('should return a 201', async done => {
-      server.redis.set = jest.fn(() => Promise.resolve('done'));
+      mockedShortURLService.setDefaultId('someUniqShortURL');
 
       const response = await server.inject({
         method: 'POST',
-        url: '/api/shortURL',
+        url: '/api/shorturls',
         payload: { redirectURL: 'http://domain.tld' },
         headers: {
           origin: 'http://shortnr',
@@ -84,26 +94,36 @@ describe('/api/shortURL', () => {
 
       expect(response.statusCode).toEqual(201);
       expect(response.headers['location-id']).toEqual(
-        'http://shortnr/someUniqShortURL'
+        'https://shortnr.test/someUniqShortURL'
       );
       done();
     });
 
-    it('should return a 400', async done => {
-      server.redis.set = jest.fn(() => Promise.reject('My error'));
+    it('should return a 422', async done => {
+      const response = await server.inject({
+        method: 'POST',
+        url: '/api/shorturls',
+        payload: { redirectURL: 'poiuyt' },
+      });
+
+      expect(response.statusCode).toEqual(422);
+      done();
+    });
+
+    it('should return a 500', async done => {
+      mockedShortURLService.activateThrowErrorMode();
 
       const response = await server.inject({
         method: 'POST',
-        url: '/api/shortURL',
-        payload: { redirectURL: 'redirectURL' },
+        url: '/api/shorturls',
+        payload: { redirectURL: 'website.com' },
       });
 
-      expect(response.statusCode).toEqual(400);
-      expect(response.payload).toEqual(
-        JSON.stringify({
-          error: 'Error: http://redirecturl is not a valid URL',
-        })
-      );
+      expect(response.statusCode).toEqual(500);
+
+      const parsedPayload = JSON.parse(response.payload);
+      expect(parsedPayload).toHaveProperty('message');
+      expect(parsedPayload.message).toContain('Error');
       done();
     });
   });
