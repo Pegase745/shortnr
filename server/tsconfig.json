@@ -6,6 +6,8 @@
     "target": "es6",
     "module": "commonjs",
     "removeComments": true,
-    "outDir": "../dist/server"
-  }
+    "outDir": "../dist/server",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
 }

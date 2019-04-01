@@ -16,4 +16,4 @@ coverage
 npm-debug.log
 dist
 config/production.json
-docker/redis/data/*
+docker/db/data/*

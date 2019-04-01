@@ -1,7 +1,7 @@
 import { IConfig } from 'config';
 import * as fastify from 'fastify';
 import * as http from 'http';
-import { Redis } from 'ioredis';
+import { Connection } from 'typeorm';
 
 declare module 'fastify' {
   // tslint:disable-next-line:interface-name
@@ -11,7 +11,7 @@ declare module 'fastify' {
     HttpResponse = http.ServerResponse
   > {
     config: IConfig;
-    redis: Redis;
+    db: Connection;
     blipp(): void;
   }
 }
