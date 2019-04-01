@@ -1,5 +1,4 @@
 import axios from 'axios';
-import * as copyToClipboard from 'copy-to-clipboard';
 import { mount, shallow } from 'enzyme';
 import * as React from 'react';
 
@@ -69,7 +68,6 @@ describe('Home.tsx', () => {
 
     process.nextTick(() => {
       expect(axios.post).toBeCalledTimes(1);
-      expect(copyToClipboard).toBeCalledTimes(1);
       expect(wrapper.state('shortURL')).toEqual('shortURL');
       expect(wrapper.state('isWorking')).toBeFalsy();
       done();

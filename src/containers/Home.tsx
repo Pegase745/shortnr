@@ -1,11 +1,9 @@
 import { RouteComponentProps } from '@reach/router';
 import axios from 'axios';
-import * as copyToClipboard from 'copy-to-clipboard';
 import * as React from 'react';
 import { Input } from 'semantic-ui-react';
 
 import Layout from '../components/Layout';
-import AlertCopy from './components/AlertCopy';
 import AlertError from './components/AlertError';
 import Header from './components/Header';
 import ShortURL from './components/ShortURL';
@@ -51,7 +49,6 @@ class Home extends React.Component<RouteComponentProps, IState> {
       .then(res => {
         const shortURL = res.headers['location-id'];
         this.setState({ shortURL });
-        copyToClipboard(shortURL);
       })
       .catch(err => {
         if (err.response && err.response.data.message) {
@@ -86,6 +83,7 @@ class Home extends React.Component<RouteComponentProps, IState> {
           icon="linkify"
           iconPosition="left"
           action={{
+            title: 'Shorten',
             content: 'Shorten',
             disabled: !this.state.redirectURL,
             loading: this.state.isWorking,
@@ -109,10 +107,6 @@ class Home extends React.Component<RouteComponentProps, IState> {
   public renderFlashMessage() {
     if (!!this.state.error) {
       return <AlertError error={this.state.error} />;
-    }
-
-    if (!this.state.isWorking && this.state.shortURL) {
-      return <AlertCopy />;
     }
 
     return null;
