@@ -16,6 +16,7 @@ const ShortURL: React.FC<IShortURLProps> = ({ fullURL }) => {
   };
 
   const actionProps = {
+    title: 'Copy to clipboard',
     icon: 'copy',
     onClick: handleClick,
   };
