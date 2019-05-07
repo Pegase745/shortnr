@@ -30,7 +30,9 @@
     "lint": "tslint --project tsconfig.json && tslint --project server/tsconfig.json",
     "format": "prettier --write 'src/**/*.{ts,tsx}' 'server/**/*.{ts,tsx}'",
     "test": "jest --verbose",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "devDependencies": {
     "@types/config": "0.0.34",
@@ -105,11 +107,13 @@
     "serve-static": "^1.13.2",
     "shortid": "^2.2.14",
     "typeorm": "^0.2.16",
-    "validator": "^10.11.0"
+    "validator": "^10.11.0",
+    "snyk": "^1.161.1"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  }
+  },
+  "snyk": true
 }
