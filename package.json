@@ -85,7 +85,7 @@
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "config": "^3.0.1",
     "copy-to-clipboard": "^3.0.8",
     "fastify": "^2.0.1",
